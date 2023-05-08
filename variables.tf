@@ -38,6 +38,12 @@ variable "description" {
   default     = null
 }
 
+variable "grafana_version" {
+  description = "(Optional) Specifies the version of Grafana to support in the new workspace. Supported values are 8.4 and 9.4. If not specified, defaults to 8.4. Upgrading the workspace version isn't supported, however it's possible to copy content from the old version to the new one using AWS official migration tool."
+  type        = string
+  default     = "8.4"
+}
+
 variable "account_access_type" {
   description = "The type of account access for the workspace. Valid values are `CURRENT_ACCOUNT` and `ORGANIZATION`"
   type        = string

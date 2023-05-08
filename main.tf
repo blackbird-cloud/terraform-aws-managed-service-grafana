@@ -15,10 +15,11 @@ resource "aws_grafana_workspace" "this" {
   name        = var.name
   description = var.description
 
-  account_access_type      = var.account_access_type
-  authentication_providers = var.authentication_providers
-  permission_type          = var.permission_type
+  grafana_version = var.grafana_version
 
+  account_access_type       = var.account_access_type
+  authentication_providers  = var.authentication_providers
+  permission_type           = var.permission_type
   configuration             = var.configuration
   data_sources              = var.data_sources
   notification_destinations = var.notification_destinations
