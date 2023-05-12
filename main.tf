@@ -273,6 +273,15 @@ data "aws_iam_policy_document" "this" {
       resources = ["arn:${data.aws_partition.current.partition}:sns:*:${data.aws_caller_identity.current.account_id}:grafana*"]
     }
   }
+
+  # Cloudwatch OAM
+  statement {
+    actions = [
+      "oam:ListSinks",
+      "oam:ListAttachedLinks"
+    ]
+    resources = ["*"]
+  }
 }
 
 resource "aws_iam_policy" "this" {
