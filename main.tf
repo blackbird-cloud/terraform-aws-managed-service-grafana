@@ -178,6 +178,19 @@ data "aws_iam_policy_document" "this" {
     for_each = contains(var.data_sources, "CLOUDWATCH") ? [1] : []
 
     content {
+      sid = "AllowListingSinksandLinksCloudWatchOAM"
+      actions = [
+        "oam:ListSinks",
+        "oam:ListAttachedLinks"
+      ]
+      resources = ["*"]
+    }
+  }
+
+  dynamic "statement" {
+    for_each = contains(var.data_sources, "CLOUDWATCH") ? [1] : []
+
+    content {
       sid = "AllowReadingLogsFromCloudWatch"
       actions = [
         "logs:DescribeLogGroups",
@@ -272,15 +285,6 @@ data "aws_iam_policy_document" "this" {
       ]
       resources = ["arn:${data.aws_partition.current.partition}:sns:*:${data.aws_caller_identity.current.account_id}:grafana*"]
     }
-  }
-
-  # Cloudwatch OAM
-  statement {
-    actions = [
-      "oam:ListSinks",
-      "oam:ListAttachedLinks"
-    ]
-    resources = ["*"]
   }
 }
 
